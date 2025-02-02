@@ -1,0 +1,15 @@
+#buttons-container button {
+    font-weight: 800;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: var(--secondary-color);
+    color: #333;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+#buttons-container button:hover { 
+    background-color: var(--accent-color);
+}
