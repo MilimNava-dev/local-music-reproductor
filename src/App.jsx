@@ -18,11 +18,13 @@ export default function App() {
   return (
     <>
       <video src="/clouds.mp4" autoPlay loop muted />
-      <main>
-        <MusicPlayer reproductionType={reproductionType} setIsPlaying={setIsPlaying} isPlaying={isPlaying} audioRef={audioRef} songs={songs} setSongs={setSongs} setCurrentSong={setCurrentSong} currentSong={currentSong}/>
-        <OptionButtons setReproductionType={setReproductionType} reproductionType={reproductionType} setIsPlaying={setIsPlaying} isPlaying={isPlaying} audioRef={audioRef}  songs={songs} setSongs={setSongs} setCurrentSong={setCurrentSong} currentSong={currentSong}/>
-      </main>
-      <SongList setReproductionType={setReproductionType} reproductionType={reproductionType} setIsPlaying={setIsPlaying} isPlaying={isPlaying} audioRef={audioRef}  songs={songs} setSongs={setSongs} setCurrentSong={setCurrentSong} currentSong={currentSong}/>
+      <div className="main-container">
+        <main>
+          <MusicPlayer reproductionType={reproductionType} setIsPlaying={setIsPlaying} isPlaying={isPlaying} audioRef={audioRef} songs={songs} setSongs={setSongs} setCurrentSong={setCurrentSong} currentSong={currentSong}/>
+          <OptionButtons setReproductionType={setReproductionType} reproductionType={reproductionType} setIsPlaying={setIsPlaying} isPlaying={isPlaying} audioRef={audioRef}  songs={songs} setSongs={setSongs} setCurrentSong={setCurrentSong} currentSong={currentSong}/>
+        </main>
+        <SongList setReproductionType={setReproductionType} reproductionType={reproductionType} setIsPlaying={setIsPlaying} isPlaying={isPlaying} audioRef={audioRef}  songs={songs} setSongs={setSongs} setCurrentSong={setCurrentSong} currentSong={currentSong}/>
+      </div>
     </>
   )
 }

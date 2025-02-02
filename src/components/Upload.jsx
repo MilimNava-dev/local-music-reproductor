@@ -13,10 +13,13 @@ export default function Upload(props) {
             return;
         }
     
-        const newFiles = files.filter(file => 
-            !props.songs.some(song => song.name === file.name)
-        );
-    
+        const newFiles = files.filter(file => {
+            const existingSong = props.songs.some(song => song.name === removeFileExtension(file.name))
+            return !existingSong
+        });
+        
+        console.log('newFiles', newFiles);
+
         if (newFiles.length === 0) {
             console.error('All files are already uploaded');
             return;

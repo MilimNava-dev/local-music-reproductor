@@ -42,7 +42,7 @@ export default function Player(props) {
             <div className="player-container">
                 <img src="/music-image.png" alt="musical note image" />
                 <div className="progress-container">
-                    <label>{formatTime(Math.floor(props.audioRef.current.currentTime))}</label>
+                    <label>{props.audioRef.current?.currentTime? formatTime(Math.floor(props.audioRef.current.currentTime)): null}</label>
                     <input 
                         type="range" 
                         min="0" 
@@ -50,7 +50,7 @@ export default function Player(props) {
                         value={audioProgress} 
                         onChange={handleProgressChange} 
                     />
-                    <label>{formatTime(Math.floor(props.audioRef.current.duration))}</label>
+                    <label>{props.audioRef.current?.duration ? formatTime(Math.floor(props.audioRef.current.duration)): null}</label>
                 </div>
                 <div className="player-controls-container">
                     <button className="player-controls" onClick={() => getPreviousSong(props)}>
