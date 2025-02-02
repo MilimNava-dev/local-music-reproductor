@@ -8,10 +8,10 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "predeploy": "npm run -d build",
+    "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
-  "homepage": "https://github.com/MilimNava-dev/local-music-reproductor",
+  "homepage": "https://MilimNava-dev.github.io/local-music-reproductor",
   "dependencies": {
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
