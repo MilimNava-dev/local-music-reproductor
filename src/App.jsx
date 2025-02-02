@@ -17,7 +17,7 @@ export default function App() {
   console.log('running app with states:', songs, currentSong, isPlaying);
   return (
     <>
-      <video src="/clouds.mp4" autoPlay loop muted />
+      <video src={`${import.meta.env.BASE_URL}/clouds.mp4`} autoPlay loop muted />
       <div className="main-container">
         <main>
           <MusicPlayer reproductionType={reproductionType} setIsPlaying={setIsPlaying} isPlaying={isPlaying} audioRef={audioRef} songs={songs} setSongs={setSongs} setCurrentSong={setCurrentSong} currentSong={currentSong}/>

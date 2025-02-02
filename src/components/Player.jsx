@@ -40,7 +40,7 @@ export default function Player(props) {
         <>
             <audio ref={props.audioRef} autoPlay onTimeUpdate={handleTimeUpdate} />
             <div className="player-container">
-                <img src="/music-image.png" alt="musical note image" />
+                <img src={`${import.meta.env.BASE_URL}/music-image.png`} alt="musical note image" />
                 <div className="progress-container">
                     <label>{props.audioRef.current?.currentTime? formatTime(Math.floor(props.audioRef.current.currentTime)): null}</label>
                     <input 
