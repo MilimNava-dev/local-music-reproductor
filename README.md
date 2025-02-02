@@ -1,8 +1,47 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Local music reproductor
 
-Currently, two official plugins are available:
+Esta app es una simple web de solo frontend que permite cargar tus canciones locales y reproducirlas en un bonito reproductor con varias opciones.
+## Ejecutarlo localmente
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Clona el proyecto
+
+```bash
+  git clone https://github.com/MilimNava-dev/local-music-reproductor.git
+```
+
+Ir al directorio del proyecto
+
+```bash
+  cd local-music-reproductor
+```
+
+Instalar dependencias
+
+```bash
+  npm install
+```
+
+Iniciar el servidor
+
+```bash
+  npm run dev
+```
+o
+
+```bash
+    npm run start
+```
+
+
+## Tech Stack
+
+**Client:** 
+- HTML
+- CSS
+- JS
+- React
+
+**Server:**
+- No server
+
