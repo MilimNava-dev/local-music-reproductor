@@ -25,9 +25,26 @@ export default function Player(props) {
         if (!props.currentSong) {
             if (props.songs.length === 0) return;
             props.setCurrentSong(props.songs[0]);
+            return; // Evita ejecutar play/pause si estamos cambiando la canción
         }
+    
         props.setIsPlaying(prev => !prev);
-        props.isPlaying ? props.audioRef.current.pause() : props.audioRef.current.play();
+    
+        if (props.isPlaying) {
+            props.audioRef.current.pause();
+        } else {
+            // Espera a que el src cargue antes de intentar reproducir
+            const playAudio = () => {
+                props.audioRef.current.play().catch(error => console.error("Error al reproducir:", error));
+            };
+    
+            props.audioRef.current.addEventListener("loadeddata", playAudio, { once: true });
+    
+            // Asegura que el evento se elimine en la próxima llamada
+            return () => {
+                props.audioRef.current.removeEventListener("loadeddata", playAudio);
+            };
+        }
     };
 
     const formatTime = (seconds) => {

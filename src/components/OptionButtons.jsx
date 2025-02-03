@@ -23,14 +23,31 @@ export default function OptionButtons(props) {
 
     
     useEffect(() => {
-        if (props.audioRef.current && props.currentSong) {
-            props.audioRef.current.src = props.currentSong.url;
-            props.audioRef.current.play().catch(error => {
-                console.error("Error al reproducir la canción:", error);
-            });
-            props.setIsPlaying(true)
-        }
+        if (!props.audioRef.current || !props.currentSong?.url) return;  // Verifica que currentSong y su URL existan
+    
+        const audioElement = props.audioRef.current;
+    
+        // Detiene cualquier reproducción en curso antes de cambiar la fuente
+        audioElement.pause();
+        
+        // Asigna la nueva fuente
+        audioElement.src = props.currentSong.url;
+        
+        // Espera a que los datos del audio se carguen antes de intentar reproducir
+        const playAudio = () => {
+            audioElement.play()
+                .then(() => props.setIsPlaying(true))
+                .catch(error => console.error("Error al reproducir la canción:", error));
+        };
+    
+        audioElement.addEventListener("loadeddata", playAudio, { once: true });
+    
+        return () => {
+            audioElement.removeEventListener("loadeddata", playAudio);
+        };
+    
     }, [props.currentSong]);
+    
 
     const handleChangeReproductionType = () => {
         props.setReproductionType((prevReproductionType) => prevReproductionType === "loop" ? "random" : "loop");

@@ -27,6 +27,7 @@ li {
     list-style: none;
     width: 100%;
     transition: bold 0.3s ease;
+    cursor: pointer;
 }
 
 li i {
