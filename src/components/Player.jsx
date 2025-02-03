@@ -49,6 +49,7 @@ export default function Player(props) {
                         max="100" 
                         value={audioProgress} 
                         onChange={handleProgressChange} 
+                        disabled={!props.currentSong}
                     />
                     <label>{props.audioRef.current?.duration ? formatTime(Math.floor(props.audioRef.current.duration)): null}</label>
                 </div>
