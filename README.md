@@ -45,3 +45,8 @@ o
 **Server:**
 - No server
 
+## Pruébalo online!!
+
+Ves a la web publicada en GitHub Pages!!
+
+https://milimnava-dev.github.io/local-music-reproductor/
