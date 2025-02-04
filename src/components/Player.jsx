@@ -28,22 +28,19 @@ export default function Player(props) {
             return; // Evita ejecutar play/pause si estamos cambiando la canción
         }
     
-        props.setIsPlaying(prev => !prev);
+        const audioElement = props.audioRef.current;
+        
+        if (!audioElement) return;
     
-        if (props.isPlaying) {
-            props.audioRef.current.pause();
+        if (!audioElement.paused) {
+            // Si el audio se está reproduciendo, lo pausamos
+            audioElement.pause();
+            props.setIsPlaying(false);
         } else {
-            // Espera a que el src cargue antes de intentar reproducir
-            const playAudio = () => {
-                props.audioRef.current.play().catch(error => console.error("Error al reproducir:", error));
-            };
-    
-            props.audioRef.current.addEventListener("loadeddata", playAudio, { once: true });
-    
-            // Asegura que el evento se elimine en la próxima llamada
-            return () => {
-                props.audioRef.current.removeEventListener("loadeddata", playAudio);
-            };
+            // Si el audio está pausado, intentamos reproducirlo
+            audioElement.play()
+                .then(() => props.setIsPlaying(true))
+                .catch(error => console.error("Error al reproducir la canción:", error));
         }
     };
 
