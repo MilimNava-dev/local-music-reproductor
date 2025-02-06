@@ -7,7 +7,7 @@
     width: 100%;
 }
 
-img {
+.player-container img {
     width: 40%;
     animation: spin 4s infinite;
     margin: 10px 0;

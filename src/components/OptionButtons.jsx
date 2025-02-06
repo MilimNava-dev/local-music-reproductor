@@ -1,7 +1,7 @@
 import '../styles/OptionButtons.css'
 import Upload from "./Upload";
 import {getNextSong} from "../utils/getNPSong";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 export default function OptionButtons(props) {
 
@@ -11,6 +11,11 @@ export default function OptionButtons(props) {
         const audioElement = props.audioRef.current;
 
         const handleSongEnd = () => {
+            if (props.reproductionType === "repeat-one") {
+                audioElement.currentTime = 0;
+                audioElement.play();
+                return;
+            };
             getNextSong(props);
         };
 
@@ -48,16 +53,28 @@ export default function OptionButtons(props) {
     
     }, [props.currentSong]);
     
-
     const handleChangeReproductionType = () => {
-        props.setReproductionType((prevReproductionType) => prevReproductionType === "loop" ? "random" : "loop");
+        props.setReproductionType(prev => {
+            if (prev === "loop") return "random";
+            if (prev === "random") return "repeat-one";
+            return "loop";
+        });
     };
 
-
+    // Selección del icono según el modo de reproducción
+    const renderIcon = () => {
+        if (props.reproductionType === "loop") {
+            return <i className="fa-solid fa-repeat"></i>;
+        } else if (props.reproductionType === "random") {
+            return <i className="fa-solid fa-shuffle"></i>;
+        } else {
+            return <img src={`${import.meta.env.BASE_URL}/repeat-one.svg`} alt="Repeat One" className="custom-icon" />;
+        }
+    };
 
     return (
         <section id="buttons-container">
-            <button onClick={handleChangeReproductionType}>{props.reproductionType === "loop"? <i className="fa-solid fa-repeat"></i> : <i className="fa-solid fa-shuffle"></i>}</button>
+            <button onClick={handleChangeReproductionType}>{renderIcon()}</button>
             <Upload audioRef={props.audioRef} songs={props.songs} setSongs={props.setSongs} setCurrentSong={props.setCurrentSong} currentSong={props.currentSong}/>
         </section>
     );

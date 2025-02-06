@@ -56,7 +56,11 @@ export default function Player(props) {
             <div className="player-container">
                 <img src={`${import.meta.env.BASE_URL}/music-image.png`} alt="musical note image" />
                 <div className="progress-container">
-                    <label>{props.audioRef.current?.currentTime? formatTime(Math.floor(props.audioRef.current.currentTime)): null}</label>
+                    <label>{
+                        props.currentSong?
+                        formatTime(Math.floor(props.audioRef.current.currentTime)):
+                        null
+                    }</label>
                     <input 
                         type="range" 
                         min="0" 
