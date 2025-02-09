@@ -1,5 +1,20 @@
 # TODO
 This is the todo list for ideas of new implementations to add to the web
 
-# Content
-- [ ] Add 1 song bucle reproduction type
+## Content
+- [x] Add 1 song bucle reproduction type
+- [x] Get actually prev song in random mode
+- [ ] Change background / implement themes
+
+## Code improvements
+- [x] Reduce prop drilling
+- [x] Add comments
+- [x] Put all comments in English
+- [x] Create formatTime util
+- [x] Create PlayerButtons component
+
+## User friendliness improvements
+- [x] Disable buttons when no songs
+
+## Ideas
+- [ ] Try to get song cover

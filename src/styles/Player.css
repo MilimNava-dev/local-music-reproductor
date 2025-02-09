@@ -28,7 +28,7 @@
     margin-bottom: 20px;
 }
 .player-controls {
-  color: #333;
+    color: #333;
     font-size: 1rem;
     background-color: var(--secondary-color);
     border: none;
@@ -39,7 +39,11 @@
     transition: background-color 0.3s ease;
 }
 
-.player-controls:hover {
+.player-controls:disabled {
+    cursor: auto;
+}
+
+.player-controls:hover:not(:disabled) {
     background-color: var(--accent-color);
 }
 

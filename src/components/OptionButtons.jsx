@@ -10,15 +10,19 @@ export default function OptionButtons(props) {
 
         const audioElement = props.audioRef.current;
 
+        // Set next song when song finishes
         const handleSongEnd = () => {
+            // If the audio is in repeat-one mode, restart the song
             if (props.reproductionType === "repeat-one") {
                 audioElement.currentTime = 0;
                 audioElement.play();
                 return;
             };
+
+            // If not, get the next song
             getNextSong(props);
         };
-
+        
         audioElement.addEventListener("ended", handleSongEnd);
 
         return () => {
@@ -26,19 +30,19 @@ export default function OptionButtons(props) {
         };
     }, [props.currentSong, props.songs, props.reproductionType]);
 
-    
+    // Every time currentSong changes, we play it
     useEffect(() => {
-        if (!props.audioRef.current || !props.currentSong?.url) return;  // Verifica que currentSong y su URL existan
+        if (!props.audioRef.current || !props.currentSong?.url) return;
     
         const audioElement = props.audioRef.current;
     
-        // Detiene cualquier reproducción en curso antes de cambiar la fuente
+        // Stops the audio
         audioElement.pause();
         
-        // Asigna la nueva fuente
+        // Assign new source
         audioElement.src = props.currentSong.url;
         
-        // Espera a que los datos del audio se carguen antes de intentar reproducir
+        // Waits for the audio to load before playing it
         const playAudio = () => {
             audioElement.play()
                 .then(() => props.setIsPlaying(true))
@@ -48,11 +52,13 @@ export default function OptionButtons(props) {
         audioElement.addEventListener("loadeddata", playAudio, { once: true });
     
         return () => {
+            // Remove event listener
             audioElement.removeEventListener("loadeddata", playAudio);
         };
     
     }, [props.currentSong]);
     
+    // Changes the reproductionType state when the user clicks
     const handleChangeReproductionType = () => {
         props.setReproductionType(prev => {
             if (prev === "loop") return "random";
@@ -61,7 +67,7 @@ export default function OptionButtons(props) {
         });
     };
 
-    // Selección del icono según el modo de reproducción
+    // Selects the correct icon for the reproduction type
     const renderIcon = () => {
         if (props.reproductionType === "loop") {
             return <i className="fa-solid fa-repeat"></i>;

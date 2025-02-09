@@ -11,7 +11,7 @@ export function getNextSong(props) {
                 nextIndex = Math.floor(Math.random() * props.songs.length);
             } while (nextIndex === currentIndex); // Evita que la misma canción se repita
         }
-
+        props.setPreviousSong(props.currentSong);
         props.setCurrentSong(props.songs[nextIndex]);
 
 }
@@ -27,10 +27,13 @@ export function getPreviousSong(props) {
             nextIndex = props.songs.length - 1:
             nextIndex = (currentIndex - 1) % props.songs.length;
         } else if (props.reproductionType === "random") {
-            do {
-                nextIndex = Math.floor(Math.random() * props.songs.length);
-            } while (nextIndex === currentIndex); // Evita que la misma canción se repita
+            if (props.previousSong && props.previousSong !== props.currentSong) {
+                nextIndex = props.songs.findIndex(song => song.name === props.previousSong?.name);
+            } else {
+                do {
+                    nextIndex = Math.floor(Math.random() * props.songs.length);
+                } while (nextIndex === currentIndex);
+            }
         }
-
         props.setCurrentSong(props.songs[nextIndex]);
 }
