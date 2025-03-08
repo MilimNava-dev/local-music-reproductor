@@ -11,7 +11,7 @@ export default function Upload(props) {
         const files = Array.from(event.target.files);
         
         if (!files.length) {
-            console.error('No files selected');
+            console.warn('No files selected');
             return;
         }
         
@@ -32,6 +32,7 @@ export default function Upload(props) {
         const newSongs = newFiles.map(file => ({
             name: removeFileExtension(file.name),
             url: URL.createObjectURL(file),
+            reproductionIndex: 0,
             file: file
         }));
     

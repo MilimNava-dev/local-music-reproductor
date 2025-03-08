@@ -7,13 +7,28 @@ export function getNextSong(props) {
         if (props.reproductionType === "loop") {
             nextIndex = (currentIndex + 1) % props.songs.length;
         } else if (props.reproductionType === "random") {
-            do {
-                nextIndex = Math.floor(Math.random() * props.songs.length);
-            } while (nextIndex === currentIndex); // Evita que la misma canción se repita
+            nextIndex = getNextRandomSong(props, currentIndex);
         }
         props.setPreviousSong(props.currentSong);
         props.setCurrentSong(props.songs[nextIndex]);
 
+}
+
+function getNextRandomSong(props, prevIndex) {
+    props.currentSong.reproductionIndex = 1;
+    let sortedSongs = props.songs.filter(song => song.reproductionIndex === 0);
+    if (sortedSongs.length === 0) {
+        props.songs.forEach(song => song.reproductionIndex = 0);
+        sortedSongs = [...props.songs].sort((a) => !a.reproductionIndex);
+    }
+    let nextIndex;
+    do {
+        const nextIndexNew = Math.floor(Math.random() * sortedSongs.length);
+        const nextSong = sortedSongs[nextIndexNew]
+        nextIndex = props.songs.findIndex(song => song.name === nextSong.name);
+    } while (nextIndex === prevIndex);
+
+    return nextIndex;
 }
 
 export function getPreviousSong(props) {
