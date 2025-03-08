@@ -25,7 +25,6 @@ ul {
 
 li {
     list-style: none;
-    width: 100%;
     transition: bold 0.3s ease;
     cursor: pointer;
 }
@@ -36,6 +35,20 @@ li i {
 
 li:not(#no-songs):hover {
     font-weight: bold;
+}
+
+.song-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.delete-icon{
+    transition: color 0.15s;
+}
+
+.delete-icon:hover {
+    color: rgb(255, 40, 40);
 }
 
 @media (max-width: 600px) {

@@ -2,7 +2,7 @@ import formatTime from "../utils/formatTime";
 
 import PlayerButtons from "./PlayerButtons";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "../styles/Player.css";
 
 export default function Player(props) {
@@ -44,11 +44,11 @@ export default function Player(props) {
                         type="range" 
                         min="0" 
                         max="100" 
-                        value={audioProgress} 
+                        value={audioProgress && props.currentSong? audioProgress: 0} 
                         onChange={handleProgressChange} 
                         disabled={!props.currentSong}
                     />
-                    <label>{props.audioRef.current?.duration ? formatTime(Math.floor(props.audioRef.current.duration)): null}</label>
+                    <label>{props.audioRef.current?.duration && props.currentSong? formatTime(Math.floor(props.audioRef.current.duration)): null}</label>
                 </div>
                 <div className="player-controls-container">
                     {
