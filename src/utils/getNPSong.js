@@ -34,21 +34,20 @@ function getNextRandomSong(props, prevIndex) {
 export function getPreviousSong(props) {
     const currentIndex = props.songs.findIndex(song => song.name === props.currentSong?.name);
     
-        if (currentIndex === -1) return;
+    if (currentIndex === -1) return;
 
-        let nextIndex;
-        if (props.reproductionType === "loop") {
-            currentIndex === 0?
-            nextIndex = props.songs.length - 1:
-            nextIndex = (currentIndex - 1) % props.songs.length;
-        } else if (props.reproductionType === "random") {
-            if (props.previousSong && props.previousSong !== props.currentSong) {
-                nextIndex = props.songs.findIndex(song => song.name === props.previousSong?.name);
-            } else {
-                do {
-                    nextIndex = Math.floor(Math.random() * props.songs.length);
-                } while (nextIndex === currentIndex);
-            }
+    let nextIndex;
+    if (props.reproductionType === "loop") {
+        currentIndex === 0?
+        nextIndex = props.songs.length - 1:
+        nextIndex = (currentIndex - 1) % props.songs.length;
+    } else if (props.reproductionType === "random") {
+        if (props.previousSong && props.previousSong !== props.currentSong) {
+            nextIndex = props.songs.findIndex(song => song.name === props.previousSong?.name);
+            props.setPreviousSong(null);
+        } else {
+            nextIndex = getNextRandomSong(props, currentIndex);
         }
-        props.setCurrentSong(props.songs[nextIndex]);
+    }
+    props.setCurrentSong(props.songs[nextIndex]);
 }
