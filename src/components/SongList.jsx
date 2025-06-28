@@ -5,12 +5,14 @@ export default function SongList(props) {
     };
 
     const deleteSong = song => {
+        URL.revokeObjectURL(song.url);
         props.setSongs(prevSongs => prevSongs.filter(prevSong => prevSong.name !== song.name));
         if (props.currentSong?.name === song.name) {
             props.setCurrentSong(null)
             props.setIsPlaying(false)
             props.audioRef.current.pause();
         };
+        props.setWarnings((prevWarnings) => ([...prevWarnings, {message: 'Song deleted successfully', type: 'green'}]));
     }
 
     return (

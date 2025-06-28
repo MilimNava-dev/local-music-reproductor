@@ -41,6 +41,8 @@ export default function App() {
     warnings,
     setWarnings
   };
+
+  document.title = currentSong?.name || "Local Music Player";
   
   console.log('running app with states:', songs, currentSong, isPlaying, warnings);
   return (

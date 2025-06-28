@@ -8,6 +8,7 @@ export default function Upload(props) {
     const handleFileUpload = (event) => {
         // Get an array of files from the input
         const files = Array.from(event.target.files);
+        event.target.value = null;
         
         if (!files.length) {
             console.warn('No files selected');
