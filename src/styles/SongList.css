@@ -43,6 +43,10 @@ li:not(#no-songs):hover {
     align-items: center;
 }
 
+.music-icon {
+    margin-right: 5px;
+}
+
 .delete-icon{
     transition: color 0.15s;
 }

@@ -1,0 +1,56 @@
+.warning-div {
+    padding: 1rem 1.5rem;
+    color: #ffffff;
+    display: flex;
+    width: fit-content;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.5);
+    animation: enter 0.3s ease, leave 0.3s 5s ease;
+}
+
+.warning-container {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    bottom: 20px;
+    right: 20px;
+    height: fit-content;
+    position: fixed;
+    z-index: 1000000000;
+}
+
+.red {
+    background-color: #fd4d32;
+}
+.orange {
+    background-color: #fda832;
+}
+.green {
+    background-color: #94fd32;
+}
+
+@keyframes enter {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0%);
+    }
+}
+
+@keyframes leave {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(100%);
+    }
+}
+
+.warning-container i {
+    margin-right: 0.5rem;
+}

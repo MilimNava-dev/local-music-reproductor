@@ -6,7 +6,7 @@ This is the todo list for ideas of new implementations to add to the web
 - [x] Get actually prev song in random mode
 - [x] Remove songs
 - [ ] Change background / implement themes
-- [ ] Add visual warning when added same song another time error
+- [x] Add visual warning when added same song another time error
 
 ## Code improvements
 - [x] Reduce prop drilling

@@ -2,7 +2,6 @@ import removeFileExtension from "../utils/removeExtension";
 import { useRef } from "react";
 
 export default function Upload(props) {
-
     // Set Ref for file input
     const fileInputRef = useRef(null);
     
@@ -12,6 +11,7 @@ export default function Upload(props) {
         
         if (!files.length) {
             console.warn('No files selected');
+            props.setWarnings((prevWarnings) => ([...prevWarnings, {message: 'No files selected', type: 'red'}]));
             return;
         }
         
@@ -20,11 +20,16 @@ export default function Upload(props) {
             const existingSong = props.songs.some(song => song.name === removeFileExtension(file.name))
             return !existingSong
         });
-        
+
         if (newFiles.length === 0) {
-            console.error('All files are already uploaded');
+            console.warn('All files are already uploaded');
+            props.setWarnings((prevWarnings) => ([...prevWarnings, {message: 'All files are already uploaded', type: 'red'}]));
             return;
+        } else if (newFiles.length < files.length) {
+            console.warn('Some files are already uploaded');
+            props.setWarnings((prevWarnings) => ([...prevWarnings, {message: 'Some files are already uploaded', type: 'orange'}]));
         }
+        
 
         console.log('New Files: ', newFiles);
     
@@ -37,6 +42,7 @@ export default function Upload(props) {
         }));
     
         props.setSongs(prevSongs => [...prevSongs, ...newSongs]);
+        props.setWarnings((prevWarnings) => ([...prevWarnings, {message: 'Files added successfully', type: 'green'}]));
     };
 
     return (

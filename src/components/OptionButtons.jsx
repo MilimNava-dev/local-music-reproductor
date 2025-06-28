@@ -81,7 +81,7 @@ export default function OptionButtons(props) {
     return (
         <section id="buttons-container">
             <button onClick={handleChangeReproductionType}>{renderIcon()}</button>
-            <Upload audioRef={props.audioRef} songs={props.songs} setSongs={props.setSongs} setCurrentSong={props.setCurrentSong} currentSong={props.currentSong}/>
+            <Upload {...props}/>
         </section>
     );
 }
